@@ -2,10 +2,9 @@
 
 namespace PiensaPeru.API.Resources
 {
-    public class SaveDataTypeResource
+    public class SaveQuestionResource
     {
         [Required]
-        [EmailAddress]
-        public string? Name { get; set; }
+        public string? Description { get; set; }
     }
 }

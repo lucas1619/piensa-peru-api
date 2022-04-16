@@ -8,7 +8,10 @@ namespace PiensaPeru.API.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Person, PersonResource>();
-
+            CreateMap<Post, PostResource>();
+            CreateMap<Quiz, QuizResource>();
+            CreateMap<Question, QuestionResource>();
+            CreateMap<Option, OptionResource>();
             CreateMap<Supervisor, SupervisorResource>();
             CreateMap<Image, ImageResource>();
             CreateMap<DataType, DataTypeResource>();

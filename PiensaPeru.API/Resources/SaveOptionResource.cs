@@ -2,14 +2,11 @@
 
 namespace PiensaPeru.API.Resources
 {
-    public class SavePercentageDataResource
+    public class SaveOptionResource
     {
         [Required]
-        public int Number { get; set; }
-        [Required]
-        [MaxLength(255)]
         public string? Description { get; set; }
         [Required]
-        public int ContentId { get; set; }
+        public bool IsAnswer { get; set; }
     }
 }

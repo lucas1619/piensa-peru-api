@@ -89,7 +89,7 @@ namespace PiensaPeru.API.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var personResource = _mapper.Map<Person, PersonResource>(result.Resource);
+            var personResource = _mapper.Map<Supervisor, SupervisorResource>(result.Resource);
             return Ok(personResource);
         }
     }

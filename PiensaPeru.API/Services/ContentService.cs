@@ -5,7 +5,7 @@ using PiensaPeru.API.Domain.Services.Communications;
 
 namespace PiensaPeru.API.Services
 {
-    public class ContentService
+    public class ContentService : IContentService
     {
         private readonly IContentRepository _contentRepository;
         private readonly IUnitOfWork _unitOfWork;
