@@ -27,12 +27,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 // Repositories
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Services
-builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ISupervisorService, SupervisorService>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

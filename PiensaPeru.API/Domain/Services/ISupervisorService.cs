@@ -7,7 +7,8 @@ namespace PiensaPeru.API.Domain.Services
     {
         Task<IEnumerable<Supervisor>> ListAsync();
         Task<SupervisorResponse> GetByIdAsync(int id);
-        Task<SupervisorResponse> SaveAsync(int personId, Supervisor supervisor);
+        Task<SupervisorResponse> SaveAsync(Supervisor supervisor);
         Task<SupervisorResponse> UpdateAsync(int id, Supervisor supervisor);
+        Task<SupervisorResponse> DeleteAsync(int id);
     }
 }

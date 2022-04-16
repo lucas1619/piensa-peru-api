@@ -46,13 +46,13 @@ namespace PiensaPeru.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(SupervisorResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync(int personId, [FromBody] SaveSupervisorResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveSupervisorResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var supervisor = _mapper.Map<SaveSupervisorResource, Supervisor>(resource);
-            var result = await _supervisorService.SaveAsync(personId, supervisor);
+            var result = await _supervisorService.SaveAsync(supervisor);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -77,6 +77,20 @@ namespace PiensaPeru.API.Controllers
 
             var supervisorResource = _mapper.Map<Supervisor, SupervisorResource>(result.Resource);
             return Ok(supervisorResource);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(PersonResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _supervisorService.DeleteAsync(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var personResource = _mapper.Map<Person, PersonResource>(result.Resource);
+            return Ok(personResource);
         }
     }
 }

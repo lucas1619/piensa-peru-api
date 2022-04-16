@@ -16,9 +16,9 @@ namespace PiensaPeru.API.Persistence.Repositories
             await _context.Supervisors.AddAsync(supervisor);
         }
 
-        public async Task<Supervisor> FindByPersonId(int personId)
+        public async Task<Supervisor> FindById(int id)
         {
-            return await _context.Supervisors.FindAsync(personId);
+            return await _context.Supervisors.FindAsync(id);
         }
 
         public async Task<IEnumerable<Supervisor>> ListAsync()
@@ -26,16 +26,14 @@ namespace PiensaPeru.API.Persistence.Repositories
             return await _context.Supervisors.ToListAsync();
         }
 
-        public async Task<IEnumerable<Supervisor>> ListByPersonIdAsync(int personId)
-        {
-            return await _context.Supervisors
-                .Where(s => s.PersonId == personId)
-                .ToListAsync();
-        }
-
         public void Update(Supervisor supervisor)
         {
             _context.Supervisors.Update(supervisor);
+        }
+
+        public void Remove(Supervisor supervisor)
+        {
+            _context.Supervisors.Remove(supervisor);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PiensaPeru.API.Resources
 {
-    public class SaveSupervisorResource
+    public class SaveSupervisorResource : SavePersonResource
     {
         [Required]
         [EmailAddress]
