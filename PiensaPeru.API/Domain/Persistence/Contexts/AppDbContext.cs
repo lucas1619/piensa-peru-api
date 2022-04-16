@@ -18,6 +18,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
         public DbSet<PostType>? PostTypes { get; set; }
         public DbSet<PercentageData>? PercentagesData { get; set; }
         public DbSet<Content>? Contents { get; set; }
+        public DbSet<Post>? Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
