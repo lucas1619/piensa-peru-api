@@ -10,6 +10,12 @@ namespace PiensaPeru.API.Mapping
             CreateMap<SavePersonResource, Person>();
 
             CreateMap<SaveSupervisorResource, Supervisor>();
+            CreateMap<SaveImageResource, Image>();
+            CreateMap<SaveDataTypeResource, DataType>();
+            CreateMap<SaveParagraphResource, Paragraph>();
+            CreateMap<SavePercentageDataResource, PercentageData>();
+            CreateMap<SavePostTypeResource, PostType>();
+            CreateMap<SaveContentResource, Content>();
         }
     }
 }

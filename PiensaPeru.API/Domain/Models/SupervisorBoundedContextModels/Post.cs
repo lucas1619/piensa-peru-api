@@ -15,6 +15,7 @@
         public int SupervisorId { get; set; }
         public Supervisor? Supervisor { get; set; }
         public ICollection<Image>? Images { get; set; }
+        public ICollection<Paragraph>? Paragraphs { get; set; }
 
     }
 }

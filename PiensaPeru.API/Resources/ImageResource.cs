@@ -1,6 +1,8 @@
-﻿namespace PiensaPeru.API.Domain.Models
+﻿using PiensaPeru.API.Domain.Models;
+
+namespace PiensaPeru.API.Resources
 {
-    public class Image
+    public class ImageResource
     {
         public int Id { get; set; }
         public string? Title { get; set; }
