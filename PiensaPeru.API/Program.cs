@@ -29,9 +29,30 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Repositories
 builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IOptionRepository, OptionRepository>();
+builder.Services.AddScoped<IParagraphRepository, ParagraphRepository>();
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
+builder.Services.AddScoped<IPostTypeRepository, PostTypeRepository>();
+builder.Services.AddScoped<IContentRepository, ContentRepository>();
+builder.Services.AddScoped<IPercentageDataRepository, PercentageDataRepository>();
+builder.Services.AddScoped<IDataTypeRepository, DataTypeRepository>();
 
 // Services
 builder.Services.AddScoped<ISupervisorService, SupervisorService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IQuizService, QuizService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IOptionService, OptionService>();
+builder.Services.AddScoped<IParagraphService, ParagraphService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IPostTypeService, PostTypeService>();
+builder.Services.AddScoped<IContentService, ContentService>();
+builder.Services.AddScoped<IPercentageDataService, PercentageDataService>();
+builder.Services.AddScoped<IDataTypeService, DataTypeService>();
+
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
