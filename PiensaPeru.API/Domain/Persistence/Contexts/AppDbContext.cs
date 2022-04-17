@@ -53,7 +53,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new Supervisor
                     {
-                        Id = 100,
+                        Id = 1000,
                         FirstName = "José",
                         LastName = "Quispe",
                         Email = "jose.quispe@gmail.com",
@@ -62,13 +62,14 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Supervisor
                     {
-                        Id = 101,
+                        Id = 1001,
                         FirstName = "Olga",
                         LastName = "Pérez",
                         Email = "olga.perez@gmail.com",
                         Password = "password123"
                     }
                 );
+
 
             // Post Entity
             modelBuilder.Entity<Post>().ToTable("Posts");
@@ -93,7 +94,8 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 1",
                         ContentId = 100,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
+                        PostTypeId = 100
                     },
 
                     new Post
@@ -103,7 +105,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 2",
                         ContentId = 101,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 100
                     },
 
@@ -114,7 +116,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 3",
                         ContentId = 102,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 101
                     },
 
@@ -125,7 +127,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 4",
                         ContentId = 103,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 101
                     },
 
@@ -136,7 +138,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 5",
                         ContentId = 104,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 102
                     },
 
@@ -147,7 +149,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 6",
                         ContentId = 105,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 102
                     },
 
@@ -158,7 +160,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         AuthorName = "José Quispe",
                         Tag = "Tag 7",
                         ContentId = 106,
-                        SupervisorId = 100,
+                        SupervisorId = 1000,
                         PostTypeId = 102
                     }
                 );
@@ -718,12 +720,12 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new Militant
                     {
-                        Id = 1,
-                        MilitantTypeId = 1,
+                        Id = 100,
+                        MilitantTypeId = 100,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        PolitcalPartyId = 1,
+                        PolitcalPartyId = 100,
                         PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
                         IsPresident = true,
                         FirstName = "Pepe",
@@ -731,12 +733,12 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new Militant
                     {
-                        Id = 2,
-                        MilitantTypeId = 1,
+                        Id = 101,
+                        MilitantTypeId = 101,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        PolitcalPartyId = 1,
+                        PolitcalPartyId = 100,
                         PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
                         IsPresident = true,
                         FirstName = "Pepa",
@@ -744,12 +746,12 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new Militant
                     {
-                        Id = 3,
-                        MilitantTypeId = 1,
+                        Id = 102,
+                        MilitantTypeId = 102,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        PolitcalPartyId = 1,
+                        PolitcalPartyId = 101,
                         PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
                         IsPresident = true,
                         FirstName = "ET",
@@ -774,25 +776,25 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new MilitantContent
                     {
-                        MilitantId = 1,
+                        MilitantId = 100,
                         ContentId = 100,
                         PeriodId = 100
                     },
                     new MilitantContent
                     {
-                        MilitantId = 2,
+                        MilitantId = 101,
                         ContentId = 102,
                         PeriodId = 101
                     },
                     new MilitantContent
                     {
-                        MilitantId = 2,
+                        MilitantId = 101,
                         ContentId = 101,
                         PeriodId = 102
                     },
                     new MilitantContent
                     {
-                        MilitantId = 3,
+                        MilitantId = 102,
                         ContentId = 101,
                         PeriodId = 103
                     }
@@ -865,7 +867,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new PoliticalParty
                     {
-                        Id = 1,
+                        Id = 100,
                         Name = "Political Party 1",
                         PresidentName = "President 1",
                         FoundationDate = new DateTime(2000, 1, 1),
@@ -875,8 +877,8 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new PoliticalParty
                     {
-                        Id = 2,
-                        Name = "Political Party 1",
+                        Id = 101,
+                        Name = "Political Party 2",
                         PresidentName = "President 1",
                         FoundationDate = new DateTime(2000, 1, 1),
                         Ideology = "Ideology 1",
@@ -885,8 +887,8 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new PoliticalParty
                     {
-                        Id = 3,
-                        Name = "Political Party 1",
+                        Id = 102,
+                        Name = "Political Party 3",
                         PresidentName = "President 1",
                         FoundationDate = new DateTime(2000, 1, 1),
                         Ideology = "Ideology 1",
@@ -911,17 +913,17 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new MilitantType
                     {
-                        Id = 1,
+                        Id = 100,
                         Type = "Militant Type 1"
                     },
                     new MilitantType
                     {
-                        Id = 2,
+                        Id = 101,
                         Type = "Militant Type 2"
                     },
                     new MilitantType
                     {
-                        Id = 3,
+                        Id = 102,
                         Type = "Militant Type 3"
                     }
                 );
