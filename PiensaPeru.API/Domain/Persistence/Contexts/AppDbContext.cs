@@ -27,7 +27,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
         public DbSet<Period>? Periods { get; set; }
         public DbSet<Militant>? Militants { get; set; }
         public DbSet<MilitantContent>? MilitantContents { get; set; }
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,7 +94,6 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 1",
                         ContentId = 100,
                         SupervisorId = 100,
-                        PostTypeId = 1
                     },
 
                     new Post
@@ -105,7 +104,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 2",
                         ContentId = 101,
                         SupervisorId = 100,
-                        PostTypeId = 1
+                        PostTypeId = 100
                     },
 
                     new Post
@@ -116,7 +115,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 3",
                         ContentId = 102,
                         SupervisorId = 100,
-                        PostTypeId = 2
+                        PostTypeId = 101
                     },
 
                     new Post
@@ -127,7 +126,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 4",
                         ContentId = 103,
                         SupervisorId = 100,
-                        PostTypeId = 2
+                        PostTypeId = 101
                     },
 
                     new Post
@@ -138,7 +137,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 5",
                         ContentId = 104,
                         SupervisorId = 100,
-                        PostTypeId = 2
+                        PostTypeId = 102
                     },
 
                     new Post
@@ -149,7 +148,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 6",
                         ContentId = 105,
                         SupervisorId = 100,
-                        PostTypeId = 3
+                        PostTypeId = 102
                     },
 
                     new Post
@@ -160,7 +159,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 7",
                         ContentId = 106,
                         SupervisorId = 100,
-                        PostTypeId = 3
+                        PostTypeId = 102
                     }
                 );
 
@@ -263,20 +262,6 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Id = 104,
                         Title = "Quiz 5",
                         PostId = 104
-                    },
-
-                    new Quiz
-                    {
-                        Id = 105,
-                        Title = "Quiz 6",
-                        PostId = 105
-                    },
-
-                    new Quiz
-                    {
-                        Id = 106,
-                        Title = "Quiz 7",
-                        PostId = 106
                     }
                 );
 
@@ -316,84 +301,84 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     new Question
                     {
                         Id = 103,
-                        QuizId = 100,
+                        QuizId = 101,
                         Description = "Question 4"
                     },
 
                     new Question
                     {
                         Id = 104,
-                        QuizId = 100,
+                        QuizId = 101,
                         Description = "Question 5"
                     },
 
                     new Question
                     {
                         Id = 105,
-                        QuizId = 100,
+                        QuizId = 101,
                         Description = "Question 6"
                     },
 
                     new Question
                     {
                         Id = 106,
-                        QuizId = 100,
+                        QuizId = 102,
                         Description = "Question 7"
                     },
 
                     new Question
                     {
                         Id = 107,
-                        QuizId = 101,
+                        QuizId = 102,
                         Description = "Question 8"
                     },
 
                     new Question
                     {
                         Id = 108,
-                        QuizId = 101,
+                        QuizId = 102,
                         Description = "Question 9"
                     },
 
                     new Question
                     {
                         Id = 109,
-                        QuizId = 101,
+                        QuizId = 103,
                         Description = "Question 10"
                     },
 
                     new Question
                     {
                         Id = 110,
-                        QuizId = 101,
+                        QuizId = 103,
                         Description = "Question 11"
                     },
 
                     new Question
                     {
                         Id = 111,
-                        QuizId = 101,
+                        QuizId = 103,
                         Description = "Question 12"
                     },
 
                     new Question
                     {
                         Id = 112,
-                        QuizId = 101,
+                        QuizId = 104,
                         Description = "Question 13"
                     },
 
                     new Question
                     {
                         Id = 113,
-                        QuizId = 101,
+                        QuizId = 104,
                         Description = "Question 14"
                     },
 
                     new Question
                     {
                         Id = 114,
-                        QuizId = 101,
+                        QuizId = 104,
                         Description = "Question 15"
                     }
                  );
@@ -530,19 +515,19 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new DataType
                     {
-                        Id = 1,
+                        Id = 100,
                         Name = "Percentage"
                     },
 
                     new DataType
                     {
-                        Id = 2,
+                        Id = 101,
                         Name = "Number"
                     },
 
                     new DataType
                     {
-                        Id = 3,
+                        Id = 102,
                         Name = "idk"
                     }
                 );
@@ -565,7 +550,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new Image
                     {
-                        Id = 1,
+                        Id = 100,
                         Url = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                         Title = "Image 1",
                         PostId = 100
@@ -573,7 +558,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Image
                     {
-                        Id = 2,
+                        Id = 101,
                         Url = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                         Title = "Image 2",
                         PostId = 100
@@ -581,7 +566,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Image
                     {
-                        Id = 3,
+                        Id = 102,
                         Url = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                         Title = "Image 3",
                         PostId = 101
@@ -589,7 +574,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Image
                     {
-                        Id = 4,
+                        Id = 104,
                         Url = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                         Title = "Image 4",
                         PostId = 101
@@ -614,7 +599,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new Paragraph
                     {
-                        Id = 1,
+                        Id = 100,
                         Title = "Paragraph 1",
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         PostId = 100
@@ -622,7 +607,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Paragraph
                     {
-                        Id = 2,
+                        Id = 101,
                         Title = "Paragraph 2",
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         PostId = 101
@@ -630,7 +615,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
                     new Paragraph
                     {
-                        Id = 3,
+                        Id = 102,
                         Title = "Paragraph 3",
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         PostId = 102
@@ -656,29 +641,29 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new PercentageData
                     {
-                        Id = 1,
+                        Id = 100,
                         Number = 20,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 100,
-                        DataTypeId = 1
+                        DataTypeId = 100
                     },
 
                     new PercentageData
                     {
-                        Id = 2,
+                        Id = 101,
                         Number = 20,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 101,
-                        DataTypeId = 2
+                        DataTypeId = 101
                     },
 
                     new PercentageData
                     {
-                        Id = 3,
+                        Id = 102,
                         Number = 30,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 102,
-                        DataTypeId = 3
+                        DataTypeId = 102
                     }
                  );
 
@@ -698,19 +683,19 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new PostType
                     {
-                        Id = 1,
+                        Id = 100,
                         Name = "Post Type 1"
                     },
 
                     new PostType
                     {
-                        Id = 2,
+                        Id = 101,
                         Name = "Post Type 2"
                     },
 
                     new PostType
                     {
-                        Id = 3,
+                        Id = 102,
                         Name = "Post Type 3"
                     }
                 );
@@ -940,7 +925,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Type = "Militant Type 3"
                     }
                 );
-
+            
             // Relationships
 
             modelBuilder.Entity<Post>().HasOne(p => p.Content).WithMany(c => c.Posts).HasForeignKey(p => p.ContentId);
@@ -954,7 +939,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
             modelBuilder.Entity<MilitantContent>().HasOne(p => p.Militant).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.MilitantId);
             modelBuilder.Entity<MilitantContent>().HasOne(p => p.Content).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.ContentId);
             modelBuilder.Entity<MilitantContent>().HasOne(p => p.Period).WithOne(pt => pt.MilitantContent).HasForeignKey<MilitantContent>(p => p.PeriodId);
-
+            
             modelBuilder.ApplySnakeCaseNamingConvention();
         }
     }
