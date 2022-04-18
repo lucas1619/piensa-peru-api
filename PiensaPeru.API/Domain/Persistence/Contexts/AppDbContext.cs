@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PiensaPeru.API.Domain.Models;
+using PiensaPeru.API.Domain.Models.AdministratorBoundedContextModels;
+using PiensaPeru.API.Domain.Models.UserBoundedContextModels;
 using PiensaPeru.API.Extensions;
 
 namespace PiensaPeru.API.Domain.Persistence.Contexts
@@ -9,19 +11,22 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
+        
         public DbSet<Person>? People { get; set; }
         public DbSet<Supervisor>? Supervisors { get; set; }
-        public DbSet<DataType>? DataTypes { get; set; }
         public DbSet<Image>? Images { get; set; }
         public DbSet<Paragraph>? Paragraphs { get; set; }
-        public DbSet<PostType>? PostTypes { get; set; }
         public DbSet<PercentageData>? PercentagesData { get; set; }
         public DbSet<Content>? Contents { get; set; }
         public DbSet<Post>? Posts { get; set; }
         public DbSet<Quiz>? Quizzes { get; set; }
         public DbSet<Question>? Questions { get; set; }
         public DbSet<Option>? Options { get; set; }
+        public DbSet<Administrator>? Administrators { get; set; }
+        public DbSet<Management>? Managements { get; set; }
+        public DbSet<User>? Users { get; set; }
+        public DbSet<Calification>? Califications { get; set; }
+        public DbSet<Plan> Plans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,17 +34,17 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
             // Person Entity
             modelBuilder.Entity<Person>().ToTable("People");
-
+            
             // Constraints
             modelBuilder.Entity<Person>().HasKey(p => p.Id);
-            modelBuilder.Entity<Person>().HasDiscriminator(p => p.PersonType);
+            modelBuilder.Entity<Person>().HasDiscriminator(p => p.PersonType).IsComplete(false);
             modelBuilder.Entity<Person>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Person>().Property(p => p.FirstName).IsRequired();
             modelBuilder.Entity<Person>().Property(p => p.LastName).IsRequired();
 
             // Supervisor Constraints
-            modelBuilder.Entity<Supervisor>().Property(s => s.Email).IsRequired();
-            modelBuilder.Entity<Supervisor>().Property(s => s.Password).IsRequired();
+            modelBuilder.Entity<Supervisor>().Property(s => s.Email).HasColumnName("email").IsRequired();
+            modelBuilder.Entity<Supervisor>().Property(s => s.Password).HasColumnName("password").IsRequired();
 
             // Supervisor Seed Data
 
@@ -64,6 +69,62 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     }
                 );
 
+            // Aministrator Constraints
+            modelBuilder.Entity<Administrator>().Property(a => a.Email).HasColumnName("email").IsRequired();
+            modelBuilder.Entity<Administrator>().Property(a => a.Password).HasColumnName("password").IsRequired();
+
+            // Administrator Seed Data
+            modelBuilder.Entity<Administrator>().HasData
+                (
+                    new Administrator
+                    {
+                        Id = 102,
+                        FirstName = "Juan",
+                        LastName = "Pérez",
+                        Email = "juan.perez@gmail.com",
+                        Password = "password123"
+                    },
+
+                    new Administrator
+                    {
+                        Id = 103,
+                        FirstName = "Gloria",
+                        LastName = "Ramps",
+                        Email = "gloria.ramos@gmail.com",
+                        Password = "password123"
+                    }
+                );
+
+            // User Constraints
+            modelBuilder.Entity<User>().Property(u => u.Email).HasColumnName("email").IsRequired();
+            modelBuilder.Entity<User>().Property(u => u.Password).HasColumnName("password").IsRequired();
+            modelBuilder.Entity<User>().Property(u => u.Subscribed).IsRequired();
+
+            // User Seed Data
+            modelBuilder.Entity<User>().HasData
+                (
+                    new User
+                    {
+                        Id = 104,
+                        FirstName = "Rómulo",
+                        LastName = "López",
+                        Email = "romulo.lopez@gmail.com",
+                        Password = "password123",
+                        Subscribed = true
+                    },
+                    
+                    new User
+                    {
+                        Id = 105,
+                        FirstName = "María",
+                        LastName = "García",
+                        Email = "maria.garcia@gmail.com",
+                        Password = "password123",
+                        Subscribed = false
+                    }
+                );
+
+            
             // Post Entity
             modelBuilder.Entity<Post>().ToTable("Posts");
 
@@ -75,7 +136,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
             modelBuilder.Entity<Post>().Property(p => p.Tag).IsRequired();
             modelBuilder.Entity<Post>().Property(p => p.ContentId).IsRequired();
             modelBuilder.Entity<Post>().Property(p => p.SupervisorId).IsRequired();
-            modelBuilder.Entity<Post>().Property(p => p.PostTypeId).IsRequired();
+            modelBuilder.Entity<Post>().Property(p => p.PostType).IsRequired();
 
             // Post Seed Data
             modelBuilder.Entity<Post>().HasData
@@ -88,7 +149,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 1",
                         ContentId = 100,
                         SupervisorId = 100,
-                        PostTypeId = 100
+                        PostType = "Type 1"
                     },
 
                     new Post
@@ -99,7 +160,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 2",
                         ContentId = 101,
                         SupervisorId = 100,
-                        PostTypeId = 100
+                        PostType = "Type 1"
                     },
 
                     new Post
@@ -110,7 +171,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 3",
                         ContentId = 102,
                         SupervisorId = 100,
-                        PostTypeId = 101
+                        PostType = "Type 2"
                     },
 
                     new Post
@@ -121,7 +182,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 4",
                         ContentId = 103,
                         SupervisorId = 100,
-                        PostTypeId = 101
+                        PostType = "Type 2"
                     },
 
                     new Post
@@ -132,7 +193,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 5",
                         ContentId = 104,
                         SupervisorId = 100,
-                        PostTypeId = 102
+                        PostType = "Type 3"
                     },
 
                     new Post
@@ -143,7 +204,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 6",
                         ContentId = 105,
                         SupervisorId = 100,
-                        PostTypeId = 102
+                        PostType = "Type 3"
                     },
 
                     new Post
@@ -154,7 +215,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Tag = "Tag 7",
                         ContentId = 106,
                         SupervisorId = 100,
-                        PostTypeId = 102
+                        PostType = "Type 3"
                     }
                 );
 
@@ -496,37 +557,6 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     }
                  );
 
-            // DataType Entity
-            modelBuilder.Entity<DataType>().ToTable("DataTypes");
-
-            // Constraints
-            modelBuilder.Entity<DataType>().HasKey(dt => dt.Id);
-            modelBuilder.Entity<DataType>().Property(dt => dt.Id).IsRequired().ValueGeneratedOnAdd();
-            modelBuilder.Entity<DataType>().Property(dt => dt.Name).IsRequired();
-
-            // DataType Seed Data
-
-            modelBuilder.Entity<DataType>().HasData
-                (
-                    new DataType
-                    {
-                        Id = 100,
-                        Name = "Percentage"
-                    },
-
-                    new DataType
-                    {
-                        Id = 101,
-                        Name = "Number"
-                    },
-
-                    new DataType
-                    {
-                        Id = 102,
-                        Name = "idk"
-                    }
-                );
-
             // Image Entity
 
             modelBuilder.Entity<Image>().ToTable("Images");
@@ -628,7 +658,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
             modelBuilder.Entity<PercentageData>().Property(pd => pd.Number).IsRequired();
             modelBuilder.Entity<PercentageData>().Property(pd => pd.Description).IsRequired();
             modelBuilder.Entity<PercentageData>().Property(pd => pd.ContentId).IsRequired();
-            modelBuilder.Entity<PercentageData>().Property(pd => pd.DataTypeId).IsRequired();
+            modelBuilder.Entity<PercentageData>().Property(pd => pd.DataType).IsRequired();
 
             // PercentageData Seed Data
 
@@ -640,7 +670,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Number = 20,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 100,
-                        DataTypeId = 100
+                        DataType = "Type 1"
                     },
 
                     new PercentageData
@@ -649,7 +679,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Number = 20,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 101,
-                        DataTypeId = 101
+                        DataType = "Type 2"
                     },
 
                     new PercentageData
@@ -658,53 +688,238 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         Number = 30,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         ContentId = 102,
-                        DataTypeId = 102
+                        DataType = "Type 3"
                     }
                  );
 
-            // PostType Entity
+            // Management Entity
+            modelBuilder.Entity<Management>().ToTable("Managements");
 
-            modelBuilder.Entity<PostType>().ToTable("PostTypes");
+            // Management Constraints
+            modelBuilder.Entity<Management>().HasKey(m => m.Id);
+            modelBuilder.Entity<Management>().Property(m => m.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Management>().Property(m => m.ManagementType).IsRequired();
+            modelBuilder.Entity<Management>().Property(m => m.AdministratorId).IsRequired();
+            modelBuilder.Entity<Management>().Property(m => m.ContentId).IsRequired();
 
-            // Constraints
-
-            modelBuilder.Entity<PostType>().HasKey(pt => pt.Id);
-            modelBuilder.Entity<PostType>().Property(pt => pt.Id).IsRequired().ValueGeneratedOnAdd();
-            modelBuilder.Entity<PostType>().Property(pt => pt.Name).IsRequired();
-
-            // PostType Seed Data
-
-            modelBuilder.Entity<PostType>().HasData
+            // Management Seed Data
+            modelBuilder.Entity<Management>().HasData
                 (
-                    new PostType
+                    new Management
                     {
                         Id = 100,
-                        Name = "Post Type 1"
+                        ManagementType = "Type 1",
+                        AdministratorId = 102,
+                        ContentId = 100
                     },
 
-                    new PostType
+                    new Management
                     {
                         Id = 101,
-                        Name = "Post Type 2"
+                        ManagementType = "Type 1",
+                        AdministratorId = 102,
+                        ContentId = 101
                     },
 
-                    new PostType
+                    new Management
                     {
                         Id = 102,
-                        Name = "Post Type 3"
+                        ManagementType = "Type 1",
+                        AdministratorId = 102,
+                        ContentId = 102
+                    },
+
+                    new Management
+                    {
+                        Id = 103,
+                        ManagementType = "Type 1",
+                        AdministratorId = 101,
+                        ContentId = 103
                     }
                 );
-            
-            // Relationships
 
-            modelBuilder.Entity<Post>().HasOne(p => p.Content).WithMany(c => c.Posts).HasForeignKey(p => p.ContentId);
-            modelBuilder.Entity<Post>().HasOne(p => p.PostType).WithMany(pt => pt.Posts).HasForeignKey(p => p.PostTypeId);
-            modelBuilder.Entity<Post>().HasMany(p => p.Images).WithOne(p => p.Post).HasForeignKey(p => p.PostId);
-            modelBuilder.Entity<PercentageData>().HasOne(p => p.DataType).WithMany(p => p.PercentagesData).HasForeignKey(p => p.DataTypeId);
-            modelBuilder.Entity<Paragraph>().HasOne(p => p.Post).WithMany(pt => pt.Paragraphs).HasForeignKey(p => p.PostId);
-            modelBuilder.Entity<PercentageData>().HasOne(pd => pd.Content).WithMany(c => c.PercentagesData).HasForeignKey(pd => pd.ContentId);
             
+            // Calification Entity
+            modelBuilder.Entity<Calification>().ToTable("Califications");
+
+            // Calification Constraints
+            modelBuilder.Entity<Calification>().HasKey(c => c.Id);
+            modelBuilder.Entity<Calification>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Calification>().Property(c => c.Score).IsRequired();
+            modelBuilder.Entity<Calification>().Property(c => c.UserId).IsRequired();
+
+            // Calification Seed Data
+            modelBuilder.Entity<Calification>().HasData
+                (
+                    new Calification
+                    {
+                        Id = 100,
+                        Score = 10,
+                        UserId = 104
+                    },
+
+                    new Calification
+                    {
+                        Id = 101,
+                        Score = 20,
+                        UserId = 104
+                    },
+
+                    new Calification
+                    {
+                        Id = 102,
+                        Score = 30,
+                        UserId = 104
+                    },
+
+                    new Calification
+                    {
+                        Id = 103,
+                        Score = 40,
+                        UserId = 104
+                    },
+
+                    new Calification
+                    {
+                        Id = 104,
+                        Score = 50,
+                        UserId = 104
+                    },
+
+                    new Calification
+                    {
+                        Id = 105,
+                        Score = 60,
+                        UserId = 105
+                    },
+
+                    new Calification
+                    {
+                        Id = 106,
+                        Score = 70,
+                        UserId = 105
+                    },
+
+                    new Calification
+                    {
+                        Id = 107,
+                        Score = 80,
+                        UserId = 105
+                    },
+
+                    new Calification
+                    {
+                        Id = 108,
+                        Score = 90,
+                        UserId = 105
+                    },
+
+                    new Calification
+                    {
+                        Id = 109,
+                        Score = 100,
+                        UserId = 105
+                    }
+                );
+
+            // Plan Entity
+            modelBuilder.Entity<Plan>().ToTable("Plans");
+
+            // Plan Constraints
+            modelBuilder.Entity<Plan>().HasKey(p => p.UserId);
+            modelBuilder.Entity<Plan>().Property(p => p.Name).IsRequired();
+            modelBuilder.Entity<Plan>().Property(p => p.Description).IsRequired();
+            modelBuilder.Entity<Plan>().Property(p => p.Price).IsRequired();
+
+            // Plan Seed Data
+            modelBuilder.Entity<Plan>().HasData
+                (
+                    new Plan
+                    {
+                        UserId = 100,
+                        Name = "Plan 1",
+                        Description = "Plan 1 Description",
+                        Price = 100
+                    },
+
+                    new Plan
+                    {
+                        UserId = 101,
+                        Name = "Plan 2",
+                        Description = "Plan 2 Description",
+                        Price = 200
+                    },
+
+                    new Plan
+                    {
+                        UserId = 102,
+                        Name = "Plan 3",
+                        Description = "Plan 3 Description",
+                        Price = 300
+                    }
+                );
+
+            // Relationships
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.Content)
+                .WithMany(c => c.Posts)
+                .HasForeignKey(p => p.ContentId);
             
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Images)
+                .WithOne(p => p.Post)
+                .HasForeignKey(p => p.PostId);
+            
+            modelBuilder.Entity<Paragraph>()
+                .HasOne(p => p.Post)
+                .WithMany(pt => pt.Paragraphs)
+                .HasForeignKey(p => p.PostId);
+            
+            modelBuilder.Entity<PercentageData>()
+                .HasOne(pd => pd.Content)
+                .WithMany(c => c.PercentagesData)
+                .HasForeignKey(pd => pd.ContentId);
+
+            modelBuilder.Entity<Supervisor>()
+                .HasMany(s => s.Posts)
+                .WithOne(p => p.Supervisor)
+                .HasForeignKey(p => p.SupervisorId);
+
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.Quiz)
+                .WithOne(q => q.Post)
+                .HasForeignKey<Quiz>(q => q.PostId);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(q => q.Questions)
+                .WithOne(q => q.Quiz)
+                .HasForeignKey(q => q.QuizId);
+
+            modelBuilder.Entity<Question>()
+                .HasMany(q => q.Options)
+                .WithOne(a => a.Question)
+                .HasForeignKey(a => a.QuestionId);
+            
+            modelBuilder.Entity<Content>()
+                .HasMany(c => c.Managements)
+                .WithOne(m => m.Content)
+                .HasForeignKey(m => m.ContentId);
+
+            modelBuilder.Entity<Administrator>()
+                .HasMany(a => a.Managements)
+                .WithOne(p => p.Administrator)
+                .HasForeignKey(p => p.AdministratorId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Califications)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Plan)
+                .WithOne(p => p.User)
+                .HasForeignKey<Plan>(p => p.UserId);
+
             modelBuilder.ApplySnakeCaseNamingConvention();
         }
     }

@@ -26,6 +26,13 @@ namespace PiensaPeru.API.Persistence.Repositories
             return await _context.Posts.ToListAsync();
         }
 
+        public async Task<IEnumerable<Post>> ListBySupervisorIdAsync(int supervisorId)
+        {
+            return await _context.Posts
+                .Where(p => p.SupervisorId == supervisorId)
+                .ToListAsync();
+        }
+
         public void Remove(Post post)
         {
             _context.Posts.Remove(post);

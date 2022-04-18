@@ -35,5 +35,13 @@ namespace PiensaPeru.API.Persistence.Repositories
         {
             _context.Images.Remove(image);
         }
+
+        public async Task<IEnumerable<Image>> ListByPostIdAsync(int postId)
+        {
+            return await _context.Images
+                .Where(i => i.PostId == postId)
+                .Include(i => i.Post)
+                .ToListAsync();
+        }
     }
 }

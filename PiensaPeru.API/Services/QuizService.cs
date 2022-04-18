@@ -30,11 +30,11 @@ namespace PiensaPeru.API.Services
             return await _quizRepository.ListAsync();
         }
 
-        public async Task<QuizResponse> SaveAsync(Quiz quiz)
+        public async Task<QuizResponse> SaveAsync(int postId, Quiz quiz)
         {
             try
             {
-                //quiz.PersonId = personId;
+                quiz.PostId = postId;
                 await _quizRepository.AddAsync(quiz);
                 await _unitOfWork.CompleteAsync();
 
@@ -86,6 +86,11 @@ namespace PiensaPeru.API.Services
             {
                 return new QuizResponse($"An error ocurred while deleting the person: {ex.Message}");
             }
+        }
+
+        public async Task<IEnumerable<Quiz>> ListByPostIdAsync(int postId)
+        {
+            return await _quizRepository.ListByPostIdAsync(postId);
         }
     }
 }

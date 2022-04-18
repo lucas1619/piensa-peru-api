@@ -30,11 +30,11 @@ namespace PiensaPeru.API.Services
             return await _optionRepository.ListAsync();
         }
 
-        public async Task<OptionResponse> SaveAsync(Option option)
+        public async Task<OptionResponse> SaveAsync(int questionId, Option option)
         {
             try
             {
-                //option.PersonId = personId;
+                option.QuestionId = questionId;
                 await _optionRepository.AddAsync(option);
                 await _unitOfWork.CompleteAsync();
 
@@ -87,6 +87,11 @@ namespace PiensaPeru.API.Services
             {
                 return new OptionResponse($"An error ocurred while deleting the person: {ex.Message}");
             }
+        }
+
+        public async Task<IEnumerable<Option>> ListByQuestionIdAsync(int questionId)
+        {
+            return await _optionRepository.ListByQuestionIdAsync(questionId);
         }
     }
 }

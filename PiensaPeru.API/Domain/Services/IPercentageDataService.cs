@@ -8,7 +8,7 @@ namespace PiensaPeru.API.Domain.Services
     {
         Task<IEnumerable<PercentageData>> ListAsync();
         Task<PercentageDataResponse> GetByIdAsync(int id);
-        Task<PercentageDataResponse> SaveAsync(PercentageData percentageData);
+        Task<PercentageDataResponse> SaveAsync(int contentId, PercentageData percentageData);
         Task<PercentageDataResponse> UpdateAsync(int id, PercentageData percentageData);
         Task<PercentageDataResponse> DeleteAsync(int id);
     }

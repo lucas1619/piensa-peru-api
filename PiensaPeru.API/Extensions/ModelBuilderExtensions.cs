@@ -15,7 +15,7 @@ namespace PiensaPeru.API.Extensions
 
                     foreach (var property in entity.GetProperties())
                     {
-                        var tableIdentifier = StoreObjectIdentifier.Table(entity.GetTableName(), null);
+                        var tableIdentifier = StoreObjectIdentifier.Table(entity.GetTableName()!, null);
                         property.SetColumnName(property.GetColumnName(tableIdentifier).ToSnakeCase());
                     }
 

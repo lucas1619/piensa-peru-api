@@ -30,11 +30,11 @@ namespace PiensaPeru.API.Services
             return await _paragraphRepository.ListAsync();
         }
 
-        public async Task<ParagraphResponse> SaveAsync(Paragraph paragraph)
+        public async Task<ParagraphResponse> SaveAsync(int postId, Paragraph paragraph)
         {
             try
             {
-                //paragraph.PersonId = personId;
+                paragraph.PostId = postId;
                 await _paragraphRepository.AddAsync(paragraph);
                 await _unitOfWork.CompleteAsync();
 
@@ -87,6 +87,11 @@ namespace PiensaPeru.API.Services
             {
                 return new ParagraphResponse($"An error ocurred while deleting the person: {ex.Message}");
             }
+        }
+
+        public async Task<IEnumerable<Paragraph>> ListByPostIdAsync(int postId)
+        {
+            return await _paragraphRepository.ListByPostIdAsync(postId);
         }
     }
 }

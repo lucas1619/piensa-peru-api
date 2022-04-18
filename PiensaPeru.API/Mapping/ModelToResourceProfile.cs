@@ -1,5 +1,9 @@
 ﻿using PiensaPeru.API.Domain.Models;
+using PiensaPeru.API.Domain.Models.AdministratorBoundedContextModels;
+using PiensaPeru.API.Domain.Models.UserBoundedContextModels;
 using PiensaPeru.API.Resources;
+using PiensaPeru.API.Resources.AdministratorBoundedContextResources;
+using PiensaPeru.API.Resources.UserBoundedContextResources;
 
 namespace PiensaPeru.API.Mapping
 {
@@ -14,11 +18,14 @@ namespace PiensaPeru.API.Mapping
             CreateMap<Option, OptionResource>();
             CreateMap<Supervisor, SupervisorResource>();
             CreateMap<Image, ImageResource>();
-            CreateMap<DataType, DataTypeResource>();
             CreateMap<Paragraph, ParagraphResource>();
             CreateMap<PercentageData, PercentageDataResource>();
-            CreateMap<PostType, PostTypeResource>();
             CreateMap<Content, ContentResource>();
+            CreateMap<Administrator, AdministratorResource>();
+            CreateMap<Management, ManagementResource>();
+            CreateMap<Plan, PlanResource>();
+            CreateMap<User, UserResource>();
+            CreateMap<Calification, CalificationResource>();
         }
     }
 }

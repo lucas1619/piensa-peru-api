@@ -26,6 +26,14 @@ namespace PiensaPeru.API.Persistence.Repositories
             return await _context.Quizzes.ToListAsync();
         }
 
+        public async Task<IEnumerable<Quiz>> ListByPostIdAsync(int postId)
+        {
+            return await _context.Quizzes
+                .Where(q => q.PostId == postId)
+                .Include(q => q.Post)
+                .ToListAsync();
+        }
+
         public void Remove(Quiz quiz)
         {
             _context.Quizzes.Remove(quiz);
