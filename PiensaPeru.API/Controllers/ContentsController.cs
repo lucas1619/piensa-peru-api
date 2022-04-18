@@ -80,7 +80,7 @@ namespace PiensaPeru.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(PersonResource), 200)]
+        [ProducesResponseType(typeof(ContentResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> DeleteAsync(int id)
         {

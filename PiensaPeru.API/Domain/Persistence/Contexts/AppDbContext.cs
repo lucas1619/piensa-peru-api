@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PiensaPeru.API.Domain.Models;
+using PiensaPeru.API.Domain.Models.ContentBoundedContextModels;
 using PiensaPeru.API.Domain.Models.AdministratorBoundedContextModels;
 using PiensaPeru.API.Domain.Models.UserBoundedContextModels;
 using PiensaPeru.API.Extensions;
@@ -27,6 +28,11 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
         public DbSet<User>? Users { get; set; }
         public DbSet<Calification>? Califications { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<PoliticalParty>? PoliticalParties { get; set; }
+        public DbSet<Period>? Periods { get; set; }
+        public DbSet<Militant>? Militants { get; set; }
+        public DbSet<MilitantContent>? MilitantContents { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -859,6 +865,232 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     }
                 );
 
+            // Constraints
+
+            modelBuilder.Entity<Militant>().Property(m => m.MilitantTypeId).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.BirthPlace).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.BirthDate).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.Profession).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.PolitcalPartyId).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.PictureLink).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.IsPresident).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.FirstName).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.LastName).IsRequired();
+
+            // Militant Seed Data
+
+            modelBuilder.Entity<Militant>().HasData
+                (
+                    new Militant
+                    {
+                        Id = 100,
+                        MilitantTypeId = 100,
+                        BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        BirthDate = new DateTime(2000, 1, 1),
+                        Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        PolitcalPartyId = 100,
+                        PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
+                        IsPresident = true,
+                        FirstName = "Pepe",
+                        LastName = "Sech"
+                    },
+                    new Militant
+                    {
+                        Id = 101,
+                        MilitantTypeId = 101,
+                        BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        BirthDate = new DateTime(2000, 1, 1),
+                        Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        PolitcalPartyId = 100,
+                        PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
+                        IsPresident = true,
+                        FirstName = "Pepa",
+                        LastName = "Sesha"
+                    },
+                    new Militant
+                    {
+                        Id = 102,
+                        MilitantTypeId = 102,
+                        BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        BirthDate = new DateTime(2000, 1, 1),
+                        Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        PolitcalPartyId = 101,
+                        PictureLink = "https://gdb.voanews.com/FA20D409-3A95-46EE-AC95-5B49B1C389F2_cx0_cy1_cw0_w1023_r1_s.jpg",
+                        IsPresident = true,
+                        FirstName = "ET",
+                        LastName = "Czech"
+                    }
+                );
+
+            // MilitantContent Entity
+
+            modelBuilder.Entity<MilitantContent>().ToTable("MilitantContents");
+
+            // Constraints
+
+            modelBuilder.Entity<MilitantContent>().HasKey(mc => new { mc.MilitantId, mc.ContentId });
+            modelBuilder.Entity<MilitantContent>().Property(mc => mc.MilitantId).IsRequired();
+            modelBuilder.Entity<MilitantContent>().Property(mc => mc.ContentId).IsRequired();
+            modelBuilder.Entity<MilitantContent>().Property(mc => mc.PeriodId).IsRequired();
+
+            // MilitantContent Seed Data
+
+            modelBuilder.Entity<MilitantContent>().HasData
+                (
+                    new MilitantContent
+                    {
+                        MilitantId = 100,
+                        ContentId = 100,
+                        PeriodId = 100
+                    },
+                    new MilitantContent
+                    {
+                        MilitantId = 101,
+                        ContentId = 102,
+                        PeriodId = 101
+                    },
+                    new MilitantContent
+                    {
+                        MilitantId = 101,
+                        ContentId = 101,
+                        PeriodId = 102
+                    },
+                    new MilitantContent
+                    {
+                        MilitantId = 102,
+                        ContentId = 101,
+                        PeriodId = 103
+                    }
+                );
+
+            // Period Entity
+
+            modelBuilder.Entity<Period>().ToTable("Periods");
+
+            // Constraints
+
+            modelBuilder.Entity<Period>().HasKey(p => p.Id);
+            modelBuilder.Entity<Period>().Property(p => p.Id).IsRequired();
+            modelBuilder.Entity<Period>().Property(p => p.StartDate).IsRequired();
+            modelBuilder.Entity<Period>().Property(p => p.EndDate).IsRequired();
+            modelBuilder.Entity<Period>().Property(p => p.OriginOfCharge).IsRequired();
+
+            // Period Seed Data
+
+            modelBuilder.Entity<Period>().HasData
+                (
+                    new Period
+                    {
+                        Id = 100,
+                        StartDate = new DateTime(2000, 1, 1),
+                        EndDate = new DateTime(2000, 1, 1),
+                        OriginOfCharge = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    },
+                    new Period
+                    {
+                        Id = 101,
+                        StartDate = new DateTime(2000, 1, 1),
+                        EndDate = new DateTime(2000, 1, 1),
+                        OriginOfCharge = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    },
+                    new Period
+                    {
+                        Id = 102,
+                        StartDate = new DateTime(2000, 1, 1),
+                        EndDate = new DateTime(2000, 1, 1),
+                        OriginOfCharge = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    },
+                    new Period
+                    {
+                        Id = 103,
+                        StartDate = new DateTime(2000, 1, 1),
+                        EndDate = new DateTime(2000, 1, 1),
+                        OriginOfCharge = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                );
+
+            // Political Party Entity
+
+            modelBuilder.Entity<PoliticalParty>().ToTable("PoliticalParties");
+
+            // Constraints
+
+            modelBuilder.Entity<PoliticalParty>().HasKey(pp => pp.Id);
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.Id).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.Name).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.PresidentName).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.FoundationDate).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.Ideology).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.Position).IsRequired();
+            modelBuilder.Entity<PoliticalParty>().Property(pp => pp.PictureLink).IsRequired();
+
+            // Political Party Seed Data
+
+            modelBuilder.Entity<PoliticalParty>().HasData
+                (
+                    new PoliticalParty
+                    {
+                        Id = 100,
+                        Name = "Political Party 1",
+                        PresidentName = "President 1",
+                        FoundationDate = new DateTime(2000, 1, 1),
+                        Ideology = "Ideology 1",
+                        Position = "Position 1",
+                        PictureLink = "https://cdn.logojoy.com/wp-content/uploads/2018/05/30144704/2_big2-768x591.png"
+                    },
+                    new PoliticalParty
+                    {
+                        Id = 101,
+                        Name = "Political Party 2",
+                        PresidentName = "President 1",
+                        FoundationDate = new DateTime(2000, 1, 1),
+                        Ideology = "Ideology 1",
+                        Position = "Position 1",
+                        PictureLink = "https://cdn.logojoy.com/wp-content/uploads/2018/05/30144704/2_big2-768x591.png"
+                    },
+                    new PoliticalParty
+                    {
+                        Id = 102,
+                        Name = "Political Party 3",
+                        PresidentName = "President 1",
+                        FoundationDate = new DateTime(2000, 1, 1),
+                        Ideology = "Ideology 1",
+                        Position = "Position 1",
+                        PictureLink = "https://cdn.logojoy.com/wp-content/uploads/2018/05/30144704/2_big2-768x591.png"
+                    }
+                );
+
+            // Militant Type Entity
+
+            modelBuilder.Entity<MilitantType>().ToTable("MilitantTypes");
+
+            // Constraints
+
+            modelBuilder.Entity<MilitantType>().HasKey(mt => mt.Id);
+            modelBuilder.Entity<MilitantType>().Property(mt => mt.Id).IsRequired();
+            modelBuilder.Entity<MilitantType>().Property(mt => mt.Type).IsRequired();
+
+            // Militant Type Seed Data
+
+            modelBuilder.Entity<MilitantType>().HasData
+                (
+                    new MilitantType
+                    {
+                        Id = 100,
+                        Type = "Militant Type 1"
+                    },
+                    new MilitantType
+                    {
+                        Id = 101,
+                        Type = "Militant Type 2"
+                    },
+                    new MilitantType
+                    {
+                        Id = 102,
+                        Type = "Militant Type 3"
+                    }
+                );
+            
             // Relationships
             modelBuilder.Entity<Post>()
                 .HasOne(p => p.Content)
@@ -920,6 +1152,12 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 .WithOne(p => p.User)
                 .HasForeignKey<Plan>(p => p.UserId);
 
+            modelBuilder.Entity<Militant>().HasOne(p => p.PoliticalParty).WithMany(c => c.Militants).HasForeignKey(m => m.PolitcalPartyId);
+            modelBuilder.Entity<Militant>().HasOne(p => p.MilitantType).WithMany(pt => pt.Militants).HasForeignKey(p => p.MilitantTypeId);
+            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Militant).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.MilitantId);
+            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Content).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.ContentId);
+            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Period).WithOne(pt => pt.MilitantContent).HasForeignKey<MilitantContent>(p => p.PeriodId);
+            
             modelBuilder.ApplySnakeCaseNamingConvention();
         }
     }

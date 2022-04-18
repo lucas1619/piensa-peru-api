@@ -1,15 +1,20 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PiensaPeru.API.Domain.Persistence.Contexts;
 using PiensaPeru.API.Domain.Persistence.Repositories;
+using PiensaPeru.API.Domain.Persistence.Repositories.ContentBoundedContextIRepositories;
 using PiensaPeru.API.Domain.Persistence.Repositories.AdministratorBoundedContextRespositories;
 using PiensaPeru.API.Domain.Persistence.Repositories.UserBoundedContextRepositories;
 using PiensaPeru.API.Domain.Services;
+using PiensaPeru.API.Domain.Services.ContentBoundedContextIServices;
 using PiensaPeru.API.Domain.Services.AdministratorBoundedContextServices;
 using PiensaPeru.API.Domain.Services.UserBoundedContextServices;
 using PiensaPeru.API.Persistence.Repositories;
+using PiensaPeru.API.Persistence.Repositories.ContentBoundedContextRepositories;
 using PiensaPeru.API.Persistence.Repositories.AdministratorBoundedContextRepositories;
 using PiensaPeru.API.Persistence.Repositories.UserBoundedContextRepositories;
 using PiensaPeru.API.Services;
+using PiensaPeru.API.Services.ContentBoundedContextServices;
 using PiensaPeru.API.Services.AdministratorBoundedContextServices;
 using PiensaPeru.API.Services.UserBoundedContextServices;
 
@@ -45,6 +50,11 @@ builder.Services.AddScoped<IParagraphRepository, ParagraphRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<IPercentageDataRepository, PercentageDataRepository>();
+builder.Services.AddScoped<IDataTypeRepository, DataTypeRepository>();
+builder.Services.AddScoped<IMilitantRepository, MilitantRepository>();
+builder.Services.AddScoped<IMilitantContentRepository, MilitantContentRepository>();
+builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
+builder.Services.AddScoped<IPoliticalPartyRepository, PoliticalPartyRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<IAdministratorRepository, AdministratorRepository>();
@@ -61,6 +71,11 @@ builder.Services.AddScoped<IParagraphService, ParagraphService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IContentService, ContentService>();
 builder.Services.AddScoped<IPercentageDataService, PercentageDataService>();
+builder.Services.AddScoped<IDataTypeService, DataTypeService>();
+builder.Services.AddScoped<IMilitantService, MilitantService>();
+builder.Services.AddScoped<IMilitantContentService, MilitantContentService>();
+builder.Services.AddScoped<IPeriodService, PeriodService>();
+builder.Services.AddScoped<IPoliticalPartyService, PoliticalPartyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IAdministratorService, AdministratorService>();
@@ -70,6 +85,12 @@ builder.Services.AddScoped<ICalificationService, CalificationService>();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Piensa Perú", Version = "v1" });
+    c.EnableAnnotations();
+});
 
 var app = builder.Build();
 
