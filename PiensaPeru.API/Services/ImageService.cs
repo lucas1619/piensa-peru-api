@@ -30,7 +30,7 @@ namespace PiensaPeru.API.Services
             return await _imageRepository.ListAsync();
         }
 
-        public async Task<ImageResponse> SaveAsync(Image image)
+        public async Task<ImageResponse> SaveAsync(int postId, Image image)
         {
             try
             {
@@ -87,6 +87,11 @@ namespace PiensaPeru.API.Services
             {
                 return new ImageResponse($"An error ocurred while deleting the person: {ex.Message}");
             }
+        }
+
+        public async Task<IEnumerable<Image>> ListByPostIdAsync(int postId)
+        {
+            return await _imageRepository.ListByPostIdAsync(postId);
         }
     }
 }

@@ -7,8 +7,7 @@
         public string? Description { get; set; }
         public int ContentId { get; set; }
         public Content? Content { get; set; }
-        public DataType? DataType { get; set; }
-        public int DataTypeId { get; set; }
+        public string? DataType { get; set; }
 
     }
 }

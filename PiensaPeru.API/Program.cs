@@ -1,9 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using PiensaPeru.API.Domain.Persistence.Contexts;
 using PiensaPeru.API.Domain.Persistence.Repositories;
+using PiensaPeru.API.Domain.Persistence.Repositories.AdministratorBoundedContextRespositories;
+using PiensaPeru.API.Domain.Persistence.Repositories.UserBoundedContextRepositories;
 using PiensaPeru.API.Domain.Services;
+using PiensaPeru.API.Domain.Services.AdministratorBoundedContextServices;
+using PiensaPeru.API.Domain.Services.UserBoundedContextServices;
 using PiensaPeru.API.Persistence.Repositories;
+using PiensaPeru.API.Persistence.Repositories.AdministratorBoundedContextRepositories;
+using PiensaPeru.API.Persistence.Repositories.UserBoundedContextRepositories;
 using PiensaPeru.API.Services;
+using PiensaPeru.API.Services.AdministratorBoundedContextServices;
+using PiensaPeru.API.Services.UserBoundedContextServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,10 +43,13 @@ builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IOptionRepository, OptionRepository>();
 builder.Services.AddScoped<IParagraphRepository, ParagraphRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
-builder.Services.AddScoped<IPostTypeRepository, PostTypeRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<IPercentageDataRepository, PercentageDataRepository>();
-builder.Services.AddScoped<IDataTypeRepository, DataTypeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+builder.Services.AddScoped<IManagementRepository, ManagementRepository>();
+builder.Services.AddScoped<ICalificationRepository, CalificationRepository>();
 
 // Services
 builder.Services.AddScoped<ISupervisorService, SupervisorService>();
@@ -48,11 +59,13 @@ builder.Services.AddScoped<IQuestionService, QuestionService>();
 builder.Services.AddScoped<IOptionService, OptionService>();
 builder.Services.AddScoped<IParagraphService, ParagraphService>();
 builder.Services.AddScoped<IImageService, ImageService>();
-builder.Services.AddScoped<IPostTypeService, PostTypeService>();
 builder.Services.AddScoped<IContentService, ContentService>();
 builder.Services.AddScoped<IPercentageDataService, PercentageDataService>();
-builder.Services.AddScoped<IDataTypeService, DataTypeService>();
-
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IAdministratorService, AdministratorService>();
+builder.Services.AddScoped<IManagementService, ManagementService>();
+builder.Services.AddScoped<ICalificationService, CalificationService>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 

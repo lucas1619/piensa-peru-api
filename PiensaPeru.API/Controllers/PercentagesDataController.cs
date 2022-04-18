@@ -46,13 +46,13 @@ namespace PiensaPeru.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(PercentageDataResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SavePercentageDataResource resource)
+        public async Task<IActionResult> PostAsync(int contentId, [FromBody] SavePercentageDataResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var percentageData = _mapper.Map<SavePercentageDataResource, PercentageData>(resource);
-            var result = await _percentageDataService.SaveAsync(percentageData);
+            var result = await _percentageDataService.SaveAsync(contentId, percentageData);
 
             if (!result.Success)
                 return BadRequest(result.Message);

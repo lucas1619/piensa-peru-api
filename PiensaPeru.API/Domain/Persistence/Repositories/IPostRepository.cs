@@ -5,6 +5,7 @@ namespace PiensaPeru.API.Domain.Persistence.Repositories
     public interface IPostRepository
     {
         Task<IEnumerable<Post>> ListAsync();
+        Task<IEnumerable<Post>> ListBySupervisorIdAsync(int supervisorId);
         Task<Post> FindById(int id);
         Task AddAsync(Post post);
         void Update(Post post);

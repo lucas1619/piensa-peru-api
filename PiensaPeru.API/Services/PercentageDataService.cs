@@ -30,11 +30,11 @@ namespace PiensaPeru.API.Services
             return await _percentageDataRepository.ListAsync();
         }
 
-        public async Task<PercentageDataResponse> SaveAsync(PercentageData percentageData)
+        public async Task<PercentageDataResponse> SaveAsync(int contentId, PercentageData percentageData)
         {
             try
             {
-                //percentageData.PersonId = personId;
+                percentageData.ContentId = contentId;
                 await _percentageDataRepository.AddAsync(percentageData);
                 await _unitOfWork.CompleteAsync();
 
