@@ -883,7 +883,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 (
                     new Militant
                     {
-                        Id = 100,
+                        Id = 106,
                         MilitantTypeId = 100,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
@@ -896,7 +896,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new Militant
                     {
-                        Id = 101,
+                        Id = 107,
                         MilitantTypeId = 101,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
@@ -909,7 +909,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     },
                     new Militant
                     {
-                        Id = 102,
+                        Id = 108,
                         MilitantTypeId = 102,
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
@@ -1152,11 +1152,30 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 .WithOne(p => p.User)
                 .HasForeignKey<Plan>(p => p.UserId);
 
-            modelBuilder.Entity<Militant>().HasOne(p => p.PoliticalParty).WithMany(c => c.Militants).HasForeignKey(m => m.PolitcalPartyId);
-            modelBuilder.Entity<Militant>().HasOne(p => p.MilitantType).WithMany(pt => pt.Militants).HasForeignKey(p => p.MilitantTypeId);
-            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Militant).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.MilitantId);
-            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Content).WithMany(pt => pt.MilitantContents).HasForeignKey(p => p.ContentId);
-            modelBuilder.Entity<MilitantContent>().HasOne(p => p.Period).WithOne(pt => pt.MilitantContent).HasForeignKey<MilitantContent>(p => p.PeriodId);
+            modelBuilder.Entity<Militant>()
+                .HasOne(p => p.PoliticalParty)
+                .WithMany(c => c.Militants)
+                .HasForeignKey(m => m.PolitcalPartyId);
+            
+            modelBuilder.Entity<Militant>()
+                .HasOne(p => p.MilitantType)
+                .WithMany(pt => pt.Militants)
+                .HasForeignKey(p => p.MilitantTypeId);
+            
+            modelBuilder.Entity<MilitantContent>()
+                .HasOne(p => p.Militant)
+                .WithMany(pt => pt.MilitantContents)
+                .HasForeignKey(p => p.MilitantId);
+
+            modelBuilder.Entity<MilitantContent>()
+                .HasOne(p => p.Content)
+                .WithMany(pt => pt.MilitantContents)
+                .HasForeignKey(p => p.ContentId);
+            
+            modelBuilder.Entity<MilitantContent>()
+                .HasOne(p => p.Period)
+                .WithOne(pt => pt.MilitantContent)
+                .HasForeignKey<MilitantContent>(p => p.PeriodId);
             
             modelBuilder.ApplySnakeCaseNamingConvention();
         }

@@ -6,20 +6,20 @@ namespace PiensaPeru.API.Resources.ContentBoundedContextResources
     {
         [Required]
         [MaxLength(255)]
-        string Name { get; set; }
+        public string? Name { get; set; }
         [Required]
         [MaxLength(255)]
-        string PresidentName { get; set; }
+        public string? PresidentName { get; set; }
         [Required]
-        DateTime FoundationDate { get; set; }
-        [Required]
-        [MaxLength(255)]
-        string Ideology { get; set; }
+        public DateTime FoundationDate { get; set; }
         [Required]
         [MaxLength(255)]
-        string Position { get; set; }
+        public string? Ideology { get; set; }
         [Required]
         [MaxLength(255)]
-        string PictureLink { get; set; }
+        public string? Position { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string? PictureLink { get; set; }
     }
 }

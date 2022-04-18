@@ -1,4 +1,5 @@
 ﻿using PiensaPeru.API.Domain.Models.AdministratorBoundedContextModels;
+using PiensaPeru.API.Domain.Models.ContentBoundedContextModels;
 
 namespace PiensaPeru.API.Domain.Models
 {
@@ -8,7 +9,7 @@ namespace PiensaPeru.API.Domain.Models
         public bool Active { get; set; } = false;
 
         public ICollection<Post>? Posts { get; set; }
-        // public ICollection<MilitantContent>? MilitantsContent { get; set; }
+        public ICollection<MilitantContent>? MilitantContents { get; set; }
         public ICollection<Management>? Managements { get; set; }
         public ICollection<PercentageData>? PercentagesData { get; set; }
     }

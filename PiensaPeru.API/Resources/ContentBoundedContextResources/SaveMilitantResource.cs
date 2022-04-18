@@ -5,20 +5,20 @@ namespace PiensaPeru.API.Resources.ContentBoundedContextResources
     public class SaveMilitantResource : SavePersonResource
     {
         [Required]
-        DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [Required]
-        DateTime BirthPlace { get; set; }
-        [Required]
-        [MaxLength(255)]
-        string? Profession { get; set; }
-        [Required]
-        int PolitcalPartyId { get; set; }
+        public DateTime BirthPlace { get; set; }
         [Required]
         [MaxLength(255)]
-        string? PictureLink { get; set; }
+        public string? Profession { get; set; }
         [Required]
-        bool IsPresident { get; set; }
+        public int PolitcalPartyId { get; set; }
         [Required]
-        int MilitantTypeId { get; set; }
+        [MaxLength(255)]
+        public string? PictureLink { get; set; }
+        [Required]
+        public bool IsPresident { get; set; }
+        [Required]
+        public int MilitantTypeId { get; set; }
     }
 }

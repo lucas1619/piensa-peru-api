@@ -5,10 +5,10 @@ namespace PiensaPeru.API.Resources.ContentBoundedContextResources
     public class SavePeriodResource
     {
         [Required]
-        DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [Required]
-        DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; }
         [Required]
-        string? OriginOfCharge { get; set; }
+        public string? OriginOfCharge { get; set; }
     }
 }
