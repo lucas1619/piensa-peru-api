@@ -95,5 +95,10 @@ namespace PiensaPeru.API.Services
         {
             return await _postRepository.ListBySupervisorIdAsync(supervisorId);
         }
+
+        public async Task<IEnumerable<Post>> ListPostTypesAsync()
+        {
+            return await _postRepository.ListPostTypesAsync();
+        }
     }
 }

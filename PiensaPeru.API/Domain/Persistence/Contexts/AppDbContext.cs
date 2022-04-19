@@ -867,7 +867,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
 
             // Constraints
 
-            modelBuilder.Entity<Militant>().Property(m => m.MilitantTypeId).IsRequired();
+            modelBuilder.Entity<Militant>().Property(m => m.MilitantType).IsRequired();
             modelBuilder.Entity<Militant>().Property(m => m.BirthPlace).IsRequired();
             modelBuilder.Entity<Militant>().Property(m => m.BirthDate).IsRequired();
             modelBuilder.Entity<Militant>().Property(m => m.Profession).IsRequired();
@@ -884,7 +884,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     new Militant
                     {
                         Id = 106,
-                        MilitantTypeId = 100,
+                        MilitantType = "Type 1",
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -897,7 +897,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     new Militant
                     {
                         Id = 107,
-                        MilitantTypeId = 101,
+                        MilitantType = "Type 2",
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -910,7 +910,7 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                     new Militant
                     {
                         Id = 108,
-                        MilitantTypeId = 102,
+                        MilitantType = "Type 3",
                         BirthPlace = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         BirthDate = new DateTime(2000, 1, 1),
                         Profession = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -1059,37 +1059,6 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                         PictureLink = "https://cdn.logojoy.com/wp-content/uploads/2018/05/30144704/2_big2-768x591.png"
                     }
                 );
-
-            // Militant Type Entity
-
-            modelBuilder.Entity<MilitantType>().ToTable("MilitantTypes");
-
-            // Constraints
-
-            modelBuilder.Entity<MilitantType>().HasKey(mt => mt.Id);
-            modelBuilder.Entity<MilitantType>().Property(mt => mt.Id).IsRequired();
-            modelBuilder.Entity<MilitantType>().Property(mt => mt.Type).IsRequired();
-
-            // Militant Type Seed Data
-
-            modelBuilder.Entity<MilitantType>().HasData
-                (
-                    new MilitantType
-                    {
-                        Id = 100,
-                        Type = "Militant Type 1"
-                    },
-                    new MilitantType
-                    {
-                        Id = 101,
-                        Type = "Militant Type 2"
-                    },
-                    new MilitantType
-                    {
-                        Id = 102,
-                        Type = "Militant Type 3"
-                    }
-                );
             
             // Relationships
             modelBuilder.Entity<Post>()
@@ -1156,11 +1125,6 @@ namespace PiensaPeru.API.Domain.Persistence.Contexts
                 .HasOne(p => p.PoliticalParty)
                 .WithMany(c => c.Militants)
                 .HasForeignKey(m => m.PolitcalPartyId);
-            
-            modelBuilder.Entity<Militant>()
-                .HasOne(p => p.MilitantType)
-                .WithMany(pt => pt.Militants)
-                .HasForeignKey(p => p.MilitantTypeId);
             
             modelBuilder.Entity<MilitantContent>()
                 .HasOne(p => p.Militant)

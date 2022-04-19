@@ -32,6 +32,14 @@ namespace PiensaPeru.API.Persistence.Repositories
                 .Where(p => p.SupervisorId == supervisorId)
                 .ToListAsync();
         }
+        
+        public async Task<IEnumerable<Post>> ListPostTypesAsync()
+        {
+            return await _context.Posts
+                .GroupBy(p => p.PostType)
+                .Select(g => g.First())
+                .ToListAsync();
+        }
 
         public void Remove(Post post)
         {

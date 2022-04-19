@@ -15,6 +15,7 @@ namespace PiensaPeru.API.Mapping
         {
             CreateMap<Person, PersonResource>();
             CreateMap<Post, PostResource>();
+            CreateMap<Post, PostTypeResource>();
             CreateMap<Quiz, QuizResource>();
             CreateMap<Question, QuestionResource>();
             CreateMap<Option, OptionResource>();
@@ -27,7 +28,6 @@ namespace PiensaPeru.API.Mapping
             CreateMap<MilitantContent, MilitantContentResource>();
             CreateMap<PoliticalParty, PoliticalPartyResource>();
             CreateMap<Period, PeriodResource>();
-            
             CreateMap<Administrator, AdministratorResource>();
             CreateMap<Management, ManagementResource>();
             CreateMap<Plan, PlanResource>();
