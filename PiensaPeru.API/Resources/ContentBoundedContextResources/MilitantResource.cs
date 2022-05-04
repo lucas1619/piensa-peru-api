@@ -10,6 +10,6 @@ namespace PiensaPeru.API.Resources.ContentBoundedContextResources
         public int PolitcalPartyId { get; set; }
         public string? PictureLink { get; set; }
         public bool IsPresident { get; set; }
-        public int MilitantTypeId { get; set; }
+        public string? MilitantType { get; set; }
     }
 }

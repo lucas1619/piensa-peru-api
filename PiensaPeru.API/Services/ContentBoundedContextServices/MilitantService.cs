@@ -60,7 +60,7 @@ namespace PiensaPeru.API.Services.ContentBoundedContextServices
             existingMilitant.PolitcalPartyId = militant.PolitcalPartyId;
             existingMilitant.PictureLink = militant.PictureLink;
             existingMilitant.IsPresident = militant.IsPresident;
-            existingMilitant.MilitantTypeId = militant.MilitantTypeId;
+            existingMilitant.MilitantType = militant.MilitantType;
             existingMilitant.FirstName = militant.FirstName;
             existingMilitant.LastName = militant.LastName;
 

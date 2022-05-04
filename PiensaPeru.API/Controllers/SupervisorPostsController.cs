@@ -8,7 +8,7 @@ using PiensaPeru.API.Resources;
 
 namespace PiensaPeru.API.Controllers
 {
-    [Route("api/supervisors/{supervisorId}/[controller]")]
+    [Route("api/supervisors/{supervisorId}/posts")]
     [ApiController]
     public class SupervisorPostsController : ControllerBase
     {
@@ -20,16 +20,6 @@ namespace PiensaPeru.API.Controllers
             _postService = postService;
             _mapper = mapper;
         }
-
-        //[HttpGet]
-        //[ProducesResponseType(typeof(IEnumerable<PostResource>), 200)]
-        //public async Task<IEnumerable<PostResource>> GetAllAsync()
-        //{
-        //    var posts = await _postService.ListAsync();
-        //    var resources = _mapper
-        //        .Map<IEnumerable<Post>, IEnumerable<PostResource>>(posts);
-        //    return resources;
-        //}
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<PostResource>), 200)]

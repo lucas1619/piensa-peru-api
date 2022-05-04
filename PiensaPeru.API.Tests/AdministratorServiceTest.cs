@@ -108,6 +108,10 @@ namespace PiensaPeru.API.Tests
         public async Task UpdateAsyncWhenAdministratorIsSentSuccessfully()
         {
             // Arrange
+            Mock<IAdministratorRepository> administratorRepository = new Mock<IAdministratorRepository>();
+            var mockAdministratorRepository = GetDefaultIAdministratorRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var service = new AdministratorService(administratorRepository.Object, mockUnitOfWork.Object);
             Administrator t = new()
             {
                 Id = 1,
@@ -116,15 +120,16 @@ namespace PiensaPeru.API.Tests
                 Email = "mikypep69@hotmail.com",
                 Password = "furrykawai"
             };
-            var mockAdministratorRepository = GetDefaultIAdministratorRepositoryInstance();
-            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var mockAdministratorService = GetDefaultIAdministratorServiceInstance(); ;
-            var mockMapper = GetDefaultIMapperInstance();
+            //var mockAdministratorService = GetDefaultIAdministratorServiceInstance(); ;
+            //var mockMapper = GetDefaultIMapperInstance();
 
-            mockAdministratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
+            //mockAdministratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
+            administratorRepository.Setup(r => r.AddAsync(t));
+
+            //administratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
 
             var itemId = t.Id;
-            var itemToUpdate = new Administrator()
+            Administrator itemToUpdate = new()
             {
                 Id = 1,
                 FirstName = "Miguel",
@@ -134,13 +139,16 @@ namespace PiensaPeru.API.Tests
             };
 
             //var controller = new AdministratorsController(mockAdministratorService.Object, mockMapper.Object);
-            var service = new AdministratorService(mockAdministratorRepository.Object, mockUnitOfWork.Object);
+            
 
             // Act
             AdministratorResponse result = await service.UpdateAsync(itemId, itemToUpdate);
 
             // Assert
-            result.Should().BeOfType<NoContentResult>();
+            //Assert.AreEqual()
+            //result.Should().BeOfType<NoContentResult>();
+            result.Success.Should().Be(true);
+            
 
         }
 
