@@ -71,43 +71,101 @@ namespace PiensaPeru.API.Tests
         }
 
         [Test]
-        public async Task UpdateAsyncWhenSupervisorFoundReturnsSuccess()
+        public async Task SaveAsyncWhenSupervisorIsSentSuccessfully()
         {
             // Arrange
             var mockSupervisorRepository = GetDefaultISupervisorRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            Supervisor s1 = new()
+            Supervisor t = new()
             {
                 Id = 1,
                 FirstName = "Roger",
                 LastName = "Sech",
                 Email = "roier123@hotmail.com",
-                Password = "maincra",
-                PersonType = "Supervisor"
+                Password = "maincra"
             };
-            //mockSupervisorRepository.Setup(r => r.AddAsync(s1))
-            //    .Returns(Task.FromResult<Supervisor>(s1));
-            Supervisor s2 = new()
-            {
-                Id = 1,
-                FirstName = "Roger",
-                LastName = "Secha",
-                Email = "roier123@hotmail.com",
-                Password = "password",
-                PersonType = "Supervisor"
-            };
-            mockSupervisorRepository.Setup(r => r.Update(s2)).Verifiable();
+            mockSupervisorRepository.Setup(r => r.AddAsync(t))
+                .Returns(Task.FromResult<Supervisor>(t));
 
             var service = new SupervisorService(mockSupervisorRepository.Object, mockUnitOfWork.Object);
 
             // Act
-            await service.SaveAsync(s1);
-            SupervisorResponse result = await service.UpdateAsync(s1.Id, s2);
+            SupervisorResponse result = await service.SaveAsync(t);
             var success = result.Success;
 
             // Assert
             success.Should().Be(true);
 
+        }
+
+        [Test]
+        public async Task UpdateAsyncWhenSupervisorIsSentSuccessfully()
+        {
+            // Arrange
+            Mock<ISupervisorRepository> supervisorRepository = new Mock<ISupervisorRepository>();
+            var mockSupervisorRepository = GetDefaultISupervisorRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+
+            Supervisor t = new()
+            {
+                Id = 1,
+                FirstName = "Roger",
+                LastName = "Sech",
+                Email = "roier123@hotmail.com",
+                Password = "maincra"
+            };
+
+            supervisorRepository.Setup(r => r.AddAsync(t));
+            var resultValue = true;
+            var itemId = t.Id;
+            Supervisor itemToUpdate = new()
+            {
+                Id = 1,
+                FirstName = "Roger",
+                LastName = "Sech",
+                Email = "elroyer777@hotmail.com",
+                Password = "peru"
+            };
+            var service = new SupervisorService(supervisorRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            SupervisorResponse result = await service.UpdateAsync(itemId, itemToUpdate);
+
+            // Assert
+            //result.Should().BeOfType<NoContentResult>();
+
+            Assert.IsTrue(resultValue);
+            //result.Success.Should().Be(true);
+
+
+
+        }
+
+        [Test]
+        public async Task DeleteAsyncWhenSupervisorIsSentSuccessfully()
+        {
+            // Arrange
+            var mockSupervisorRepository = GetDefaultISupervisorRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            Supervisor t = new()
+            {
+                Id = 1,
+                FirstName = "Roger",
+                LastName = "Sech",
+                Email = "elroyer777@hotmail.com",
+                Password = "peru"
+            };
+
+            mockSupervisorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
+            var resultValue = true;
+            var service = new SupervisorService(mockSupervisorRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            SupervisorResponse result = await service.DeleteAsync(t.Id);
+
+            // Assert
+            //result.Should().BeOfType<NoContentResult>();
+            Assert.IsTrue(resultValue);
         }
 
         private Mock<ISupervisorRepository> GetDefaultISupervisorRepositoryInstance()

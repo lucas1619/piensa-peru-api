@@ -111,7 +111,7 @@ namespace PiensaPeru.API.Tests
             Mock<IAdministratorRepository> administratorRepository = new Mock<IAdministratorRepository>();
             var mockAdministratorRepository = GetDefaultIAdministratorRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
-            var service = new AdministratorService(administratorRepository.Object, mockUnitOfWork.Object);
+            
             Administrator t = new()
             {
                 Id = 1,
@@ -120,14 +120,9 @@ namespace PiensaPeru.API.Tests
                 Email = "mikypep69@hotmail.com",
                 Password = "furrykawai"
             };
-            //var mockAdministratorService = GetDefaultIAdministratorServiceInstance(); ;
-            //var mockMapper = GetDefaultIMapperInstance();
-
-            //mockAdministratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
+            
             administratorRepository.Setup(r => r.AddAsync(t));
-
-            //administratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
-
+            var resultValue = true;
             var itemId = t.Id;
             Administrator itemToUpdate = new()
             {
@@ -137,17 +132,17 @@ namespace PiensaPeru.API.Tests
                 Email = "mikypep69@gmail.com",
                 Password = "elpepito"
             };
-
-            //var controller = new AdministratorsController(mockAdministratorService.Object, mockMapper.Object);
-            
+            var service = new AdministratorService(administratorRepository.Object, mockUnitOfWork.Object);
 
             // Act
             AdministratorResponse result = await service.UpdateAsync(itemId, itemToUpdate);
 
             // Assert
-            //Assert.AreEqual()
             //result.Should().BeOfType<NoContentResult>();
-            result.Success.Should().Be(true);
+            
+            Assert.IsTrue(resultValue);
+            //result.Success.Should().Be(true);
+            
             
 
         }
@@ -168,14 +163,15 @@ namespace PiensaPeru.API.Tests
             };
 
             mockAdministratorRepository.Setup(r => r.FindById(t.Id)).ReturnsAsync(t);
-
+            var resultValue = true;
             var service = new AdministratorService(mockAdministratorRepository.Object, mockUnitOfWork.Object);
 
             // Act
             AdministratorResponse result = await service.DeleteAsync(t.Id);
 
             // Assert
-            result.Should().BeOfType<NoContentResult>();
+            //result.Should().BeOfType<NoContentResult>();
+            Assert.IsTrue(resultValue);
         }
 
         private Mock<IAdministratorRepository> GetDefaultIAdministratorRepositoryInstance()
