@@ -70,6 +70,46 @@ namespace PiensaPeru.API.Tests
 
         }
 
+        [Test]
+        public async Task UpdateAsyncWhenSupervisorFoundReturnsSuccess()
+        {
+            // Arrange
+            var mockSupervisorRepository = GetDefaultISupervisorRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            Supervisor s1 = new()
+            {
+                Id = 1,
+                FirstName = "Roger",
+                LastName = "Sech",
+                Email = "roier123@hotmail.com",
+                Password = "maincra",
+                PersonType = "Supervisor"
+            };
+            //mockSupervisorRepository.Setup(r => r.AddAsync(s1))
+            //    .Returns(Task.FromResult<Supervisor>(s1));
+            Supervisor s2 = new()
+            {
+                Id = 1,
+                FirstName = "Roger",
+                LastName = "Secha",
+                Email = "roier123@hotmail.com",
+                Password = "password",
+                PersonType = "Supervisor"
+            };
+            mockSupervisorRepository.Setup(r => r.Update(s2)).Verifiable();
+
+            var service = new SupervisorService(mockSupervisorRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            await service.SaveAsync(s1);
+            SupervisorResponse result = await service.UpdateAsync(s1.Id, s2);
+            var success = result.Success;
+
+            // Assert
+            success.Should().Be(true);
+
+        }
+
         private Mock<ISupervisorRepository> GetDefaultISupervisorRepositoryInstance()
         {
             return new Mock<ISupervisorRepository>();

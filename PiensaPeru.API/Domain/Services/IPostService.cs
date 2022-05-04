@@ -6,6 +6,7 @@ namespace PiensaPeru.API.Domain.Services
     public interface IPostService
     {
         Task<IEnumerable<Post>> ListAsync();
+        Task<IEnumerable<Post>> ListPostTypesAsync();
         Task<IEnumerable<Post>> ListBySupervisorIdAsync(int supervisorId);
         Task<PostResponse> GetByIdAsync(int id);
         Task<PostResponse> SaveAsync(int supervisorId, int contentId, Post post);

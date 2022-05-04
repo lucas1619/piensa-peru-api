@@ -8,9 +8,8 @@
         public int PolitcalPartyId { get; set; }
         public string? PictureLink { get; set; }
         public bool IsPresident { get; set; }
-        public int MilitantTypeId { get; set; }
-        public MilitantType MilitantType { get; set; }
-        public PoliticalParty PoliticalParty { get; set; }
+        public string? MilitantType { get; set; }
+        public PoliticalParty? PoliticalParty { get; set; }
         public ICollection<MilitantContent>? MilitantContents { get; set; }
     }
 }
