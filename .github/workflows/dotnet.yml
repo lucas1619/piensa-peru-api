@@ -26,6 +26,20 @@ jobs:
       
     - name: Docker build
       run: docker login --username=_ --password=${{secrets.HEROKU_API_KEY}} registry.heroku.com
+      
+    - name: Heroku login credentials
+      run: |
+        cat > ~/.netrc <<EOF
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+        EOF
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Publish
       run: |
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
