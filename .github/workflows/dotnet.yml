@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -21,8 +19,30 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
     - name: Test
       run: dotnet test
+  deploy:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
     - name: Heroku login credentials
       run: |
         cat > ~/.netrc <<EOF
@@ -43,10 +63,3 @@ jobs:
         docker build -t ${{secrets.HEROKU_APP_NAME}} .
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
         heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
-    - uses: frankie567/grafana-annotation-action@v1.0.2
-      with:
-        apiHost: https://u201917621.grafana.net
-        apiToken: ${{ secrets.GRAFANA_API_TOKEN }}
-        text: Deployment of ${{ github.sha }}
-        dashboardId: 1
-        tags: deployment,github
