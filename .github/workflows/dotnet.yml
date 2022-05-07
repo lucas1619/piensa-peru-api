@@ -23,10 +23,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test
-      
-    - name: Docker build
-      run: docker login --username=_ --password=${{secrets.HEROKU_API_KEY}} registry.heroku.com
-      
     - name: Heroku login credentials
       run: |
         cat > ~/.netrc <<EOF
@@ -42,5 +38,7 @@ jobs:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Publish
       run: |
+        heroku container:login
+        docker build -t ${{secrets.HEROKU_APP_NAME}} .
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
         heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
