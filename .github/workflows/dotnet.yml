@@ -38,6 +38,7 @@ jobs:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Publish
       run: |
+        cd ./PiensaPeru.API
         heroku container:login
         docker build -t ${{secrets.HEROKU_APP_NAME}} .
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
