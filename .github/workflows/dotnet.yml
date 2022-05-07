@@ -22,6 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
   test:
+    needs: build
     runs-on: unbuntu-lastest
     steps:
     - uses: actions/checkout@v3
