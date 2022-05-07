@@ -43,3 +43,10 @@ jobs:
         docker build -t ${{secrets.HEROKU_APP_NAME}} .
         heroku container:push web -a ${{secrets.HEROKU_APP_NAME}}
         heroku container:release web -a ${{secrets.HEROKU_APP_NAME}}
+    - uses: frankie567/grafana-annotation-action@v1.0.2
+      with:
+        apiHost: https://myinstance.grafana.net
+        apiToken: ${{ secrets.GRAFANA_API_TOKEN }}
+        text: Deployment of ${{ github.sha }}
+        dashboardId: 1
+        tags: deployment,github
